@@ -1,18 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Data extends React.Component {
-  state = {
-
-  }
-
   render() {
-    // console.log(this.props.data);
     return (
       <div className='chars'>
       {this.props.data.map(char => {
         return (
           <div key={char.created} className='char'>
-            <div className='char-name'> {char.name} </div>
+            <Link className='char-name' to={`/character/${char.name.replace(/ /g,"_")}`}>{char.name}</Link>
             <div className='char-bd attrib'> <span>Birth Year:</span> {char.birth_year} </div>
             <div className='char-gender attrib'> <span>Gender:</span> {char.gender} </div>
             <div className='char-hair attrib'> <span>Hair Color:</span> {char.hair_color} </div>
