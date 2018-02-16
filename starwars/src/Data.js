@@ -6,15 +6,21 @@ class Data extends React.Component {
     return (
       <div className='chars'>
       {this.props.data.map(char => {
+        const characterInfo = {
+          pathname: `/info/${char.name.replace(/ /g,"_")}`,
+          state: {
+            url: char.url,
+          }
+        }
         return (
           <div key={char.created} className='char'>
-            <Link className='char-name' to={`/character/${char.name.replace(/ /g,"_")}`}>{char.name}</Link>
-            <div className='char-bd attrib'> <span>Birth Year:</span> {char.birth_year} </div>
-            <div className='char-gender attrib'> <span>Gender:</span> {char.gender} </div>
-            <div className='char-hair attrib'> <span>Hair Color:</span> {char.hair_color} </div>
-            <div className='char-height attrib'> <span>Height:</span> {char.height}{'cm'} </div>
-            <div className='char-mass attrib'> <span>Mass:</span> {char.mass}{'kg'} </div>
-            <div className='char-skin attrib'> <span>Skin Color:</span> {char.skin_color} </div>
+            <Link className='char-name' to={characterInfo}>{char.name}</Link>
+            <div className='attrib'> <span>Birth Year:</span> {char.birth_year} </div>
+            <div className='attrib'> <span>Gender:</span> {char.gender} </div>
+            <div className='attrib'> <span>Hair Color:</span> {char.hair_color} </div>
+            <div className='attrib'> <span>Height:</span> {char.height}{'cm'} </div>
+            <div className='attrib'> <span>Mass:</span> {char.mass}{'kg'} </div>
+            <div className='attrib'> <span>Skin Color:</span> {char.skin_color} </div>
           </div>
             );
       })}

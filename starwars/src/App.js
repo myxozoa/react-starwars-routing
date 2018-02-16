@@ -15,10 +15,9 @@ class App extends Component {
     axios.get('https://swapi.co/api/people')
       .then(response => {
         this.setState({ starwarsChars: response.data.results, next: response.data.next, prev: response.request.responseURL });
-        console.log(response);
       })
       .catch(err => {
-        throw new Error(err);
+        console.error('error retrieving characters', err);
       });
   }
   nextPage = () => {
@@ -28,7 +27,7 @@ class App extends Component {
       this.setState({ starwarsChars: response.data.results, next: response.data.next, prev: response.data.previous });
     })
     .catch(err => {
-      throw new Error(err);
+      console.error('error going to next page', err);
     });
   }
   prevPage = () => {
@@ -38,15 +37,13 @@ class App extends Component {
       this.setState({ starwarsChars: response.data.results, next: response.data.next, prev: response.data.previous });
     })
     .catch(err => {
-      throw new Error(err);
+      console.error('error going to previous page', err);
     });
   }
 
   render() {
-    console.log(this.state.starwarsChars)
     return (
       <div className="App">
-        <h1 className="Header">React Wars</h1>
         <Data data={this.state.starwarsChars}/>
         <div className='page-nav'>
           <div className='prev' onClick={this.prevPage}>Previous Page</div>

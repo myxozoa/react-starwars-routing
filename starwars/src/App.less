@@ -1,11 +1,12 @@
-.App {
+.App, .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 0.9rem;
 }
 .Header {
-    margin: 0;
+    margin: 20px 0 0 0;
+    padding-bottom: 40px;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -17,6 +18,7 @@
     top: 0;
     color: #F8D942;
     letter-spacing: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     font-size: 4rem;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
         1px 1px 0 rgb(0, 0, 0), 2px 2px 0 #F8D942,
@@ -24,6 +26,7 @@
         5px 5px 0 rgb(0, 0, 0), 6px 6px 0 #F8D942;
 }
 .chars {
+  width: 70%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -32,7 +35,6 @@
   margin-top: 150px;
   padding: 20px 80px 80px 80px;
   color: rgb(236, 236, 236);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
 
   .char {
     display: flex;
@@ -40,7 +42,7 @@
     align-items: center;
     justify-content: center;
     width: 200px;
-    height: 300px;
+    padding: 20px 0 20px 0;
 
     .char-name {
       color: #F8D942;
@@ -95,4 +97,38 @@
   }
 
 
+}
+
+.char-info-cont {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+  padding: 80px;
+  color: white;
+
+  .char-name {
+    color: #F8D942;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .char-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .attrib {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 88%;
+      margin-bottom: 5px;
+      padding: 2px 6px 2px 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  }
 }

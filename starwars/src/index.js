@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-import Character from './Character';
+import ExtendedInfo from './ExtendedInfo';
 
 ReactDOM.render(
   <Router>
-    <div>
+    <div className='container'>
+      <h1 className="Header">React Wars</h1>
       <Route path='/' component={App} exact></Route>
-      <Route path='/character/:name' component={Character}></Route>
+      <Route path='/info/:name' component={ExtendedInfo}></Route>
     </div>
   </Router>, document.getElementById('root'));
