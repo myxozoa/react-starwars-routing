@@ -10,29 +10,38 @@ class ExtendedInfo extends React.Component {
     state = {
       linkName: null,
     };
-    componentWillMount() {
-        if (!this.props.location.state) {
-            throw new Error('Didnt click link');
-        }
 
-        axios
-            .get(this.props.location.state.url)
-            .then(response => {
-                this.setState({ info: response.data });
-
-            })
-            .catch(err => {
-                console.error('error in extendedinfo retrieval', err);
-            });
+    getInfo = () => {
+      axios
+      .get(this.props.location.state.url)
+      .then(response => {
+          this.setState({ info: response.data });
+      })
+      .catch(err => {
+          console.error('error in extendedinfo retrieval', err);
+      });
     }
 
+    componentDidMount() {
+        if (!this.props.location.state) {
+            console.error('Didnt click link');
+        }
+        if (this.refs.ref) {
+          this.getInfo();
+        }
+    }
 
-
+    componentWillReceiveProps() {
+      if (this.refs.ref) {
+        this.getInfo();
+      }
+    }
     render() {
         return (
-            <div className="char-info-cont">
+            <div ref='ref' className="char-info-cont">
+                <Link to='/'>Back Home</Link>
                 <div className="char-name">
-                    {this.props.match.params.name.replace(/_/g, ' ')}
+                  {this.props.match.params.name.replace(/_/g, ' ')}
                 </div>
                 {this.state.info ? (
                     <div className="char-info">

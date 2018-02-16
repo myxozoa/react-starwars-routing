@@ -3,10 +3,6 @@ import React from 'react';
 import InfoLink from './InfoLink';
 
 class InfoLinks extends React.Component {
-  state = {
-    linkName: 'test',
-  }
-
 
   render() {
   return (

@@ -6,16 +6,14 @@ class InfoLink extends React.Component {
   state = {
     linkName: 'Loading...',
   }
-  componentDidMount() {
-    this.fetchName();
-  }
 
   fetchName = () => {
     axios.get(this.props.link)
     .then(response => {
       const name = ( response.data.name ? response.data.name : response.data.title );
-      this.setState({ linkName: name });
-      console.log('set');
+      if (this.refs.ref) {
+        this.setState({ linkName: name, linkUrl: response.data.url });
+      }
     })
     .catch(err => {
       console.error(err);
@@ -23,14 +21,15 @@ class InfoLink extends React.Component {
   }
 
   render() {
+    this.fetchName();
     const linkInfo = {
-      pathname: `/info/${this.state.linkName}`,
+      pathname: `/info/${this.state.linkName.replace(/ /g,"_")}`,
       state: {
-          url: '',
+          url: this.state.linkUrl,
       },
     };
     return (
-      <Link to={linkInfo}>{this.state.linkName}</Link>
+      <Link ref='ref' to={linkInfo}>{this.state.linkName}</Link>
     );
   }
 }

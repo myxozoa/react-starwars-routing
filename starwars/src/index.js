@@ -10,6 +10,6 @@ ReactDOM.render(
     <div className='container'>
       <h1 className="Header">React Wars</h1>
       <Route path='/' component={App} exact></Route>
-      <Route path='/info/:name' component={ExtendedInfo}></Route>
+<Route path='/info/:name' component={(props) => (<ExtendedInfo timestamp={Date.now().toString()} {...props} />)}></Route>
     </div>
   </Router>, document.getElementById('root'));
