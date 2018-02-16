@@ -8,14 +8,17 @@ import InfoLinks from './InfoLinks';
 
 class ExtendedInfo extends React.Component {
     state = {
-      linkName: null,
+      loading: true,
     };
 
     getInfo = () => {
+      this.setState({ loading: true });
       axios
       .get(this.props.location.state.url)
       .then(response => {
-          this.setState({ info: response.data });
+        if (this.refs.ref) {
+          this.setState({ info: response.data, loading: false });
+        }
       })
       .catch(err => {
           console.error('error in extendedinfo retrieval', err);
@@ -26,24 +29,21 @@ class ExtendedInfo extends React.Component {
         if (!this.props.location.state) {
             console.error('Didnt click link');
         }
-        if (this.refs.ref) {
           this.getInfo();
-        }
     }
 
     componentWillReceiveProps() {
-      if (this.refs.ref) {
         this.getInfo();
-      }
     }
     render() {
+      console.log(this.state);
         return (
             <div ref='ref' className="char-info-cont">
                 <Link to='/'>Back Home</Link>
                 <div className="char-name">
                   {this.props.match.params.name.replace(/_/g, ' ')}
                 </div>
-                {this.state.info ? (
+                {( this.state.info && !this.state.loading ) ? (
                     <div className="char-info">
                         {Object.entries(this.state.info).map(item => {
 

@@ -12,7 +12,7 @@ class InfoLink extends React.Component {
     .then(response => {
       const name = ( response.data.name ? response.data.name : response.data.title );
       if (this.refs.ref) {
-        this.setState({ linkName: name, linkUrl: response.data.url });
+        this.setState({ linkName: name});
       }
     })
     .catch(err => {
@@ -25,7 +25,7 @@ class InfoLink extends React.Component {
     const linkInfo = {
       pathname: `/info/${this.state.linkName.replace(/ /g,"_")}`,
       state: {
-          url: this.state.linkUrl,
+          url: this.props.link,
       },
     };
     return (
