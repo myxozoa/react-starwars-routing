@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import InfoLink from './InfoLink';
+
 class ExtendedInfo extends React.Component {
     state = {};
     componentWillMount() {
@@ -12,8 +14,7 @@ class ExtendedInfo extends React.Component {
             .get(this.props.location.state.url)
             .then(response => {
                 this.setState({ info: response.data });
-                console.log(response);
-                console.log(this.state);
+
             })
             .catch(err => {
                 console.error('error in extendedinfo retrieval', err);
@@ -28,6 +29,7 @@ class ExtendedInfo extends React.Component {
                 {this.state.info ? (
                     <div className="char-info">
                         {Object.entries(this.state.info).map(item => {
+
                             return (
                                 <div key={item[0]} className="attrib">
                                     <span>
@@ -37,10 +39,7 @@ class ExtendedInfo extends React.Component {
                                         {':'}
                                     </span>
                                     <div>
-                                    {/* {Array.isArray(item[1]) ? item[1].map(item => {
-
-                                    })} */}
-                                    {item[1]}
+                                      {Array.isArray(item[1]) ? <InfoLink item={item} /> : <div>{item[1]}</div> }
                                     </div>
                                 </div>
                             );
