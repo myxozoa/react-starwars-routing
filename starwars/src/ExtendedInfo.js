@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-import InfoLink from './InfoLink';
+import { isWebUri } from 'valid-url';
+
+import InfoLinks from './InfoLinks';
 
 class ExtendedInfo extends React.Component {
-    state = {};
+    state = {
+      linkName: null,
+    };
     componentWillMount() {
         if (!this.props.location.state) {
             throw new Error('Didnt click link');
@@ -20,6 +25,9 @@ class ExtendedInfo extends React.Component {
                 console.error('error in extendedinfo retrieval', err);
             });
     }
+
+
+
     render() {
         return (
             <div className="char-info-cont">
@@ -39,7 +47,8 @@ class ExtendedInfo extends React.Component {
                                         {':'}
                                     </span>
                                     <div>
-                                      {Array.isArray(item[1]) ? <InfoLink item={item} /> : <div>{item[1]}</div> }
+                                      {}
+                                      {Array.isArray(item[1]) ? <div><InfoLinks item={item}></InfoLinks></div> : <div>{item[1]}</div> }
                                     </div>
                                 </div>
                             );
